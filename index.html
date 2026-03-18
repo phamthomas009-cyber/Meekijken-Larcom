@@ -45,7 +45,29 @@
             font-size: 18px;
             font-weight: 700;sssfsf211
             min-width: 200px;
+			display: none; /*standaard verbergen */
+            gap: 6px; /* ruimte tussen ! en error code */
+            align-items: center;
         }
+
+		.error::before {
+   			content: "!";
+   			display: inline-flex; /* standaard verbergen */
+    		align-items: center;
+    		justify-content: center;
+
+    		width: 20px;
+    		height: 20px;
+
+    		border: 1px solid #F00; /* rode rand */
+    		color: #F00;            /* rood uitroepteken */
+    		background-color: white;   /* witte achtergrond */
+
+    		border-radius: 50%;
+    		font-size: 14px;
+    		font-weight: 200;
+            align-items: center;
+		}
 
         button {
         	font-family: 'Catamaran', sans-serif;
@@ -103,7 +125,7 @@ input.addEventListener("input", function (e) {
 
     // foutmelding weg bij 9 cijfers
     if (value.length === 9) {
-        foutmelding.textContent = "";
+        foutmelding.style.display = "none";
     }
 });
 
@@ -113,10 +135,11 @@ button.addEventListener("click", function () {
 
     if (!/^\d{9}$/.test(nummer)) {
         foutmelding.textContent = "Voer precies 9 cijfers in.";
+		foutmelding.style.display = "flex"; //zichtbaar maken
         return;
     }
 
-    foutmelding.textContent = "";
+    foutmelding.style.display = "none";
 
     const url = "https://helpdesk.me/end-user-support/" + nummer;
     window.open(url, '_blank');
