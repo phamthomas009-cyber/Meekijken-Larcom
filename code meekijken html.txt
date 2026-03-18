@@ -107,6 +107,3 @@ function gaNaarLink() {
 
 </body>
 </html>
-
-
-(window.open(url, '_blank';)
