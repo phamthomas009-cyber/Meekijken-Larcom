@@ -1,0 +1,112 @@
+code meekijken html:
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Zoek Support</title>
+
+    <!-- Catamaran font -->
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Catamaran', monospace;
+            padding: 20px;
+            color: #0b2a4a;
+        }
+
+        input {
+            padding: 10px 12px; 
+            font-size: 20px;
+            color: #213461;
+            border-radius: 10px;
+            border: 2px solid #213461;
+            outline: none;
+            width: 150px;
+            height: 50px;
+            font-weight: 600;
+            font-family: 'Catamaran', monospace;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #e6592b;
+        }
+
+        input::placeholder {
+            color: #213461;
+            font-weight: 600;
+            font-family: 'Catamaran', sans-serif;
+            font-size: 20px;
+            opacity: 0.5;
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            border: none;
+            background-color: #E5DAD6;
+            color: #213461;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Catamaran', sans-serif;
+            font-weight: 800;
+        }
+
+        button:hover {
+            background-color: #213461;
+            color: #e6592b;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<input type="text" id="nummer" maxlength="11" placeholder="000-000-000">
+<br><br>
+<button onclick="gaNaarLink()">Verbinden</button>
+
+<script>
+const input = document.getElementById("nummer");
+
+input.addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // alleen cijfers
+    value = value.substring(0, 9); // max 9 cijfers
+
+    let formatted = value;
+    if (value.length > 6) {
+        formatted = value.slice(0,3) + "-" + value.slice(3,6) + "-" + value.slice(6);
+    } else if (value.length > 3) {
+        formatted = value.slice(0,3) + "-" + value.slice(3);
+    }
+
+    e.target.value = formatted;
+});
+
+function gaNaarLink() {
+    // verwijder streepjes
+    let nummer = input.value.replace(/-/g, "");
+
+    // controleer precies 9 cijfers
+    if (!/^\d{9}$/.test(nummer)) {
+        alert("Voer precies 9 cijfers in.");
+        return;
+    }
+
+    // voeg cijfers toe aan de URL en open in nieuw tabblad
+    const url = "https://helpdesk.me/end-user-support/" + nummer;
+    window.location.href = url;
+}
+</script>
+
+</body>
+</html>
+
+
+(window.open(url, '_blank';)
