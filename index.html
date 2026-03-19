@@ -11,12 +11,19 @@
             font-family: 'Catamaran', monospace;
             padding: 20px;
             color: #0b2a4a;
+			display: flex;
+    		flex-direction: column;
+    		align-items: center;   /* horizontaal centreren */
+            margin: 0;
         }
 
         .input-row {
             display: flex;
             align-items: center;
             gap: 15px;
+			position: relative;
+			justify-content: center;
+
         }
 
         input {
@@ -46,9 +53,15 @@
             font-size: 18px;
             font-weight: 200;
             min-width: 200px;
-			display: none; /*standaard verbergen */
+			
+			display: flex;
+			postion: absolute;
+			left: 100%;
             gap: 6px; /* ruimte tussen ! en error code */
-            align-items: center;
+			align-items: center;
+			opacity: 0;         /*  start onzichtbaar */
+    		transform: translateY(-5px); /*  klein beetje omhoog */
+    		transition: all 0.25s ease; /*animatie */
         }
 
 		.error::before {
@@ -68,6 +81,11 @@
     		font-size: 14px;
     		font-weight: 200;
             align-items: center;
+		}
+
+		.error.show {
+    		opacity: 1;
+    		transform: translateY(0);  /* zakt netjes op plek */
 		}
 
         button {
@@ -126,7 +144,7 @@ input.addEventListener("input", function (e) {
 
     // foutmelding weg bij 9 cijfers
     if (value.length === 9) {
-        foutmelding.style.display = "none";
+        foutmelding.classList.remove("show");
     }
 });
 
@@ -136,11 +154,11 @@ button.addEventListener("click", function () {
 
     if (!/^\d{9}$/.test(nummer)) {
         foutmelding.textContent = "Voer precies 9 cijfers in.";
-		foutmelding.style.display = "flex"; //zichtbaar maken
+		foutmelding.classList.add("show"); //zichtbaar maken
         return;
     }
 
-    foutmelding.style.display = "none";
+    foutmelding.classList.add("show");
 
     const url = "https://helpdesk.me/end-user-support/" + nummer;
     window.open(url, '_blank');
