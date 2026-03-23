@@ -91,7 +91,7 @@
         button {
         	font-family: 'Catamaran', sans-serif;
             margin-top: 32px;
-			margin-left: 7px;
+			margin-left: 3px;
             padding: 7px 34px;
             font-size: 21px;
             border-radius: 25px;
@@ -158,8 +158,8 @@ button.addEventListener("click", function () {
 		foutmelding.classList.add("show"); //zichtbaar maken
         return;
     }
-
-    foutmelding.classList.add("show");
+	//foutmelding weg bij succes 9 cijfers
+    foutmelding.classList.remove("show");
 
     const url = "https://helpdesk.me/end-user-support/" + nummer;
     window.open(url, '_blank');
